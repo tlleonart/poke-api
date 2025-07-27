@@ -1,109 +1,122 @@
-# Create T3 App
+# Pokédex App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+> **⚠️ Nota sobre tRPC**: Este proyecto utiliza tRPC como demostración de la tecnología. Sin embargo, **no hubiera recurrido al uso de tRPC para aplicaciones como esta** que consumen APIs REST externas simples. Para casos de uso que involucran únicamente el consumo de APIs de terceros, una implementación directa con `fetch` o librerías como Axios me parece más apropiada.
 
-## What's next? How do I make an app with this?
+Una aplicación web de Pokédex construida con el T3 Stack que permite explorar información detallada de todos los Pokémon, incluyendo filtros, búsqueda y visualización de cadenas evolutivas.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Características
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- ✅ Listado completo de Pokémon ordenado por ID
+- ✅ Búsqueda en tiempo real por nombre (incluye evoluciones)
+- ✅ Páginas de detalle con información completa
+- ✅ Visualización de cadenas evolutivas interactivas
+- ✅ Navegación entre evoluciones
+- ✅ Persistencia de estado de filtros y búsqueda
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Tecnologías Utilizadas
 
-## Learn More
+- [Next.js 14](https://nextjs.org) - Framework de React con App Router
+- [TypeScript](https://www.typescriptlang.org/) - Tipado estático
+- [Tailwind CSS](https://tailwindcss.com) - Framework de CSS utility-first
+- [tRPC](https://trpc.io) - Type-safe APIs (usado con fines educativos)
+- [Zod](https://zod.dev) - Validación de esquemas y type safety
+- [PokéAPI](https://pokeapi.co) - API REST de datos de Pokémon
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Instalación y Desarrollo Local
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Prerrequisitos
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- Node.js 18+ y npm/yarn/pnpm
 
-## How do I deploy this?
+### Pasos para ejecutar localmente
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+1. **Clona el repositorio**
 
-```
-poke-api
-├─ eslint.config.js
-├─ next.config.js
-├─ package-lock.json
-├─ package.json
-├─ postcss.config.js
-├─ prettier.config.js
-├─ public
-│  └─ favicon.ico
-├─ README.md
-├─ src
-│  ├─ app
-│  │  ├─ api
-│  │  │  └─ trpc
-│  │  │     └─ [trpc]
-│  │  │        └─ route.ts
-│  │  ├─ layout.tsx
-│  │  ├─ page.tsx
-│  │  └─ pokemon
-│  │     └─ [name]
-│  │        └─ page.tsx
-│  ├─ env.js
-│  ├─ modules
-│  │  ├─ home
-│  │  │  ├─ components
-│  │  │  │  ├─ index.ts
-│  │  │  │  ├─ pokemon-table
-│  │  │  │  │  ├─ index.ts
-│  │  │  │  │  ├─ pokemon-table-grid.tsx
-│  │  │  │  │  ├─ pokemon-table-image.tsx
-│  │  │  │  │  ├─ pokemon-table-pagination.tsx
-│  │  │  │  │  ├─ pokemon-table-row.tsx
-│  │  │  │  │  └─ pokemon-table.tsx
-│  │  │  │  └─ searchbar.tsx
-│  │  │  ├─ hooks
-│  │  │  │  └─ use-search-and-pagination.tsx
-│  │  │  └─ types
-│  │  │     └─ pokemon-table.types.ts
-│  │  ├─ pokemon
-│  │  │  └─ components
-│  │  │     ├─ index.ts
-│  │  │     ├─ pokemon-detail.tsx
-│  │  │     ├─ pokemon-evolution-chain.tsx
-│  │  │     ├─ pokemon-header.tsx
-│  │  │     ├─ pokemon-info.tsx
-│  │  │     ├─ pokemon-stats-display.tsx
-│  │  │     └─ pokemon-type-badges.tsx
-│  │  └─ shared
-│  │     ├─ components
-│  │     │  ├─ evolution-badge.tsx
-│  │     │  ├─ header-logo.tsx
-│  │     │  ├─ header.tsx
-│  │     │  └─ index.ts
-│  │     ├─ lib
-│  │     │  └─ schemas.ts
-│  │     ├─ types
-│  │     │  ├─ api-types.ts
-│  │     │  └─ pokemon-types.ts
-│  │     └─ utils
-│  │        └─ api-endpoints.ts
-│  ├─ server
-│  │  └─ api
-│  │     ├─ root.ts
-│  │     ├─ routers
-│  │     │  └─ pokemon.ts
-│  │     ├─ services
-│  │     │  ├─ getAllPokemons.ts
-│  │     │  └─ getPokemonByName.ts
-│  │     └─ trpc.ts
-│  ├─ styles
-│  │  └─ globals.css
-│  └─ trpc
-│     ├─ query-client.ts
-│     ├─ react.tsx
-│     └─ server.ts
-└─ tsconfig.json
+   ```bash
+   git clone https://github.com/tlleonart/poke-api.git
+   cd poke-api
+   ```
+
+2. **Instala las dependencias**
+
+   ```bash
+   npm install
+   # o
+   yarn install
+   # o
+   pnpm install
+   ```
+
+3. **Ejecuta el servidor de desarrollo**
+
+   ```bash
+   npm run dev
+   # o
+   yarn dev
+   # o
+   pnpm dev
+   ```
+
+4. **Abre la aplicación**
+
+   Navega a [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+### Scripts Disponibles
+
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Construye la aplicación para producción
+- `npm run start` - Inicia el servidor de producción
+- `npm run lint` - Ejecuta el linter de código
+- `npm run type-check` - Verifica los tipos de TypeScript
+
+## Estructura del Proyecto
 
 ```
+poke-api/
+├─ src/
+│  ├─ app/                          # App Router de Next.js 14
+│  │  ├─ api/trpc/                  # Endpoint tRPC
+│  │  ├─ layout.tsx                 # Layout principal
+│  │  ├─ page.tsx                   # Página principal (listado)
+│  │  └─ pokemon/[name]/            # Páginas dinámicas de detalle
+│  │
+│  ├─ modules/                      # Módulos organizados por funcionalidad
+│  │  ├─ home/                      # Módulo del listado principal
+│  │  │  ├─ components/             # Componentes del listado y tabla
+│  │  │  ├─ hooks/                  # Hooks personalizados para búsqueda
+│  │  │  └─ types/                  # Tipos específicos del módulo
+│  │  │
+│  │  ├─ pokemon/                   # Módulo de detalle de Pokémon
+│  │  │  └─ components/             # Componentes de información detallada
+│  │  │
+│  │  └─ shared/                    # Recursos compartidos
+│  │     ├─ components/             # Componentes reutilizables
+│  │     ├─ lib/                    # Esquemas Zod y validaciones
+│  │     ├─ types/                  # Tipos compartidos
+│  │     └─ utils/                  # Utilidades y constantes
+│  │
+│  ├─ server/                       # Configuración del servidor tRPC
+│  │  └─ api/
+│  │     ├─ routers/                # Routers tRPC por dominio
+│  │     ├─ services/               # Servicios de datos (API calls)
+│  │     └─ trpc.ts                 # Configuración base tRPC
+│  │
+│  ├─ trpc/                         # Cliente tRPC
+│  └─ styles/                       # Estilos globales
+│
+├─ public/                          # Archivos estáticos
+└─ configuración de herramientas    # ESLint, Prettier, TypeScript, etc.
+```
+
+### Explicación de Directorios Clave
+
+- **`src/app/`**: Utiliza el nuevo App Router de Next.js 14 para el enrutamiento basado en sistema de archivos.
+
+- **`src/modules/`**: Organización modular del código por funcionalidades específicas:
+  - `home/`: Todo lo relacionado con el listado principal y filtros
+  - `pokemon/`: Componentes para las páginas de detalle
+  - `shared/`: Recursos que se comparten entre módulos
+
+- **`src/server/`**: Contiene la configuración del servidor tRPC y los servicios que realizan las llamadas a la PokéAPI.
+
+- **`src/trpc/`**: Configuración del cliente tRPC para el frontend, incluyendo React Query.
