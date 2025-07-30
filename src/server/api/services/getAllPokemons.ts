@@ -27,7 +27,10 @@ export const loadSimplePokemonData = async (
     const listData = (await listResponse.json()) as PokemonListResponse;
     const validatedList = PokemonListSchema.parse(listData);
 
-    const evolutionChains = await getAllEvolutionChains(url);
+    const evolutionChains = await getAllEvolutionChains(
+      url,
+      validatedList.results.length,
+    );
 
     const simplePokemon: SimplePokemon[] = validatedList.results.map(
       (pokemon, index) => {
@@ -62,13 +65,14 @@ export const loadSimplePokemonData = async (
 
 const getAllEvolutionChains = async (
   url: string,
+  length: number,
 ): Promise<Map<string, string[]>> => {
   const evolutionChains = new Map<string, string[]>();
 
   const evolutionPromises: Promise<null | { id: number; family: string[] }>[] =
     [];
 
-  for (let i = 1; i <= 500; i++) {
+  for (let i = 1; i <= length; i++) {
     evolutionPromises.push(
       fetch(`${url}/${API_ENDPOINTS.evolutionChain}/${i}`)
         .then(async (response) => {
@@ -82,6 +86,15 @@ const getAllEvolutionChains = async (
         })
         .catch(() => null),
     );
+  }
+  const results = await Promise.all(evolutionPromises);
+
+  for (const result of results) {
+    if (result) {
+      for (const pokemonName of result.family) {
+        evolutionChains.set(pokemonName, result.family);
+      }
+    }
   }
 
   return evolutionChains;
